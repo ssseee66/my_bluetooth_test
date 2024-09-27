@@ -1,0 +1,3 @@
+dependencies:
+  bluetooth:
+    path: /home/feiyuan/Packaging/bluetooth_test/bluetooth_extend/bluetooth   #打包时扩展包的绝对路径
