@@ -21,7 +21,6 @@ class AntennaSettingView(ft.View):
         super().__init__()
 
         # 属性
-
         self.antenna_count = 0
         self.min_power = 0
         self.max_power = 0
@@ -462,19 +461,17 @@ class AntennaSettingView(ft.View):
                     self.setting_antenna_power_content.current.controls.append(setting)
         elif event_key == "antenna_message":
             if "天线功率设置成功" in event_message:
-                self.page.open(
-                    ft.SnackBar(
-                        ft.Text("天线功率设置成功！！！"),
-                        bgcolor=ft.colors.GREEN,
-                    )
+                self.page.snack_bar = ft.SnackBar(
+                    ft.Text("天线功率设置成功！！！"),
+                    bgcolor=ft.colors.GREEN,
                 )
+                self.page.snack_bar.open = True
             else:
-                self.page.open(
-                    ft.SnackBar(
-                        ft.Text("天线功率设置失败！！！"),
-                        bgcolor=ft.colors.ERROR,
-                    )
+                self.page.snack_bar = ft.SnackBar(
+                    ft.Text("天线功率设置失败！！！"),
+                    bgcolor=ft.colors.GREEN,
                 )
+                self.page.snack_bar.open = True
         self.page.update()
 
     def handle_refresh_bluetooth_device(self, e):
@@ -510,11 +507,13 @@ class AntennaSettingView(ft.View):
             self.bluetooth_conntect_state = False
             self.reader_information_content.current.visible = False
             self.query_reader_capacity_information_button.current.disabled = True
+            self.reader_information_content.current.controls.clear()
             # 天线设置相关控件隐藏以及禁用其按键
             self.can_setting_antenna = False
             self.setting_antenna_power_content.current.visible = False
             self.setting_antenna_power_button.current.disabled = True
             self.query_information_before_setting_button.current.disabled = True
+            self.setting_antenna_power_content.current.controls.clear()
             # self.bluetooth_receiver.close_connect = True
             self.bluetooth_receiver.close()
         self.page.update()

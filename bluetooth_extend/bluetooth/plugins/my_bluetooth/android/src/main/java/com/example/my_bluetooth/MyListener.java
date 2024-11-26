@@ -391,7 +391,7 @@ public class MyListener {
         msgBaseSetPower.setDicPower(hashtable);
         client.sendSynMsg(msgBaseSetPower);
         if (msgBaseSetPower.getRtCode() == 0) {
-            Log.e("设置天线功率", "设置成功");
+            
             MsgBaseGetPower msgBaseGetPower = new MsgBaseGetPower();
             client.sendSynMsg(msgBaseGetPower);
             if (msgBaseGetPower.getRtCode() == 0) {
@@ -399,6 +399,7 @@ public class MyListener {
                 message_map.put("AntennaNumMessage",
                         "天线功率设置成功:" + msgBaseGetPower.getDicPower());
                 message_channel.send(message_map);
+                Log.e("设置天线功率", "设置成功");
             }
         } else {
             Log.e("设置天线功率", "设置失败");
